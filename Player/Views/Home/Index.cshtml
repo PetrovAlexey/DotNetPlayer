@@ -1,15 +1,37 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+@{
+    ViewData["Title"] = "Личный кабинет";
 }
- 
- 
-@if(User.Identity.IsAuthenticated)
+
+
+@if (User.Identity.IsAuthenticated)
 {
-    <p>@User.Identity.Name</p>
- 
-    <form method="post" asp-controller="Account" asp-action="LogOff">
-        <input type="submit" value="Выход" />
-    </form>
+    @model IEnumerable<Player.Models.Audio>
+    <p class="text-left">Привет, @User.Identity.Name</p>
+    <h3>Моя музыка</h3>
+    <table class="table">
+        @foreach (var f in Model)
+        {
+            <tr>
+                <td>@f.Name</td>
+                <td>
+                    <form asp-controller="Home" asp-action="Play" asp-route-id="@f.Id" method="get">
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-default" value="Играть" />
+                        </div>
+                    </form>
+                </td>
+                <td>
+                    <form asp-controller="Home" asp-action="Delete" asp-route-id="@f.Id" method="post">
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-default" value="Удалить" />
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+
 }
 else
 {

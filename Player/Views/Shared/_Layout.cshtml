@@ -6,6 +6,8 @@
     <title>@ViewData["Title"] - Player</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    
+
 </head>
 <body>
     <header>
@@ -16,16 +18,56 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="navbar-collapse collapse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Music</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Download">Download</a>
                         </li>
                     </ul>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+                            <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
+                            <li class="dropdown order-1">
+                                <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Login <span class="caret"></span></button>
+                                <ul class="dropdown-menu dropdown-menu-right mt-2">
+                                    <li class="px-3 py-2">
+                                        <form method="post" asp-controller="Account" asp-action="Login" class="form" role="form">
+
+                                            <div class="form-group">
+                                                <input type="text" data-val="true" id="Email" name="Email" placeholder="Email" class="form-control form-control-sm" type="text" required="">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" data-val="true" name="Password" id="Password" placeholder="Password" class="form-control form-control-sm" type="text" required="">
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                            </div>
+                                            <div class="form-group text-center">
+                                                <small><a href="/Account/Register">Регистрация</a></small>
+                                            </div>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <span class="navbar-text">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Личный кабинет</a>
+                        </span>
+                           
+
+                        <form method="post" asp-controller="Account" asp-action="LogOff" class="form-inline my-2 my-lg-0">
+                            <input type="submit" value="Выход" class="btn btn-outline-success my-2 my-sm-0" />
+                        </form>
+                    }
                 </div>
+
             </div>
         </nav>
     </header>
@@ -35,12 +77,14 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - Player - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2019 - Player - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
+</footer>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)

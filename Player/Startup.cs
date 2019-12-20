@@ -29,17 +29,24 @@ namespace Player
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<UserContext>(options => options.UseSqlServer(connection));
-            services.AddIdentity<User, IdentityRole>(options =>
+            var connectionUser = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<UserContext>(options => options.UseSqlServer(connectionUser));
+            services
+                .AddIdentity<User, IdentityRole>(options =>
             { 
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireDigit = false;
             })
-        .AddEntityFrameworkStores<UserContext>();
+                .AddEntityFrameworkStores<UserContext>();
             services.AddControllersWithViews();
+
+            var connectionAudio = Configuration.GetConnectionString("ConnectionAudio");
+            services.AddDbContext<Models.AppContext>(options =>
+                options.UseSqlServer(connectionAudio));
+            services.AddControllersWithViews();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +63,7 @@ namespace Player
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseRouting();
