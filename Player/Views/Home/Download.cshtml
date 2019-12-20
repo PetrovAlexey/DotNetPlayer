@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "Download";
+}
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h3>Выберите файл для загрузки</h3>
+    <form asp-action="uploadFile" asp-controller="Home" method="post" enctype="multipart/form-data">
+        <input type="file" class="form-control-file" name="uploadFile"/><br>
+        <input type="submit" class="btn btn-primary pull-right" value="Загрузить"/>
+    </form>
+}
+else
+{
+<p class="text-center">Пожалуйста войдите или зарегистрируйтесь!</p>
+}
+

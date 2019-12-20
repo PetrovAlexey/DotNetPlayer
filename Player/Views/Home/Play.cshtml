@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Player";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    @model Player.Models.Audio
+
+    <h3>@Model?.Name</h3>
+
+    <figure>
+        <figcaption>Listen:</figcaption>
+        <audio controls
+               src="~/@Model?.Path">
+            Your browser does not support the
+            <code>audio</code> element.
+        </audio>
+    </figure>
+
+    
+
+    <form method="get" asp-controller="Home" asp-action="Index">
+        <input class="btn btn-light btn-lg" type="submit" value="На главную" />
+    </form>
+}
+else
+{
+    <a asp-controller="Account" asp-action="Login">Вход</a>
+    <a asp-controller="Account" asp-action="Register">Регистрация</a>
+}
+
