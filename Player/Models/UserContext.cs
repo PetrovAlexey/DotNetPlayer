@@ -10,5 +10,23 @@ namespace Player.Models
         {
             Database.EnsureCreated();
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<UserAudio>()
+                .HasKey(t => new { t.Id, t.AudioId });
+
+            modelBuilder.Entity<UserAudio>()
+                .HasOne(sc => sc.User)
+                .WithMany(s => s.Audios)
+                .HasForeignKey(sc => sc.Id);
+
+            modelBuilder.Entity<UserAudio>()
+                .HasOne(sc => sc.Audio)
+                .WithMany(c => c.Users)
+                .HasForeignKey(sc => sc.AudioId);
+        }
+        public DbSet<Audio> Audios { get; set; }
+        public DbSet<UserAudio> UserAudios { get; set; }
     }
 }

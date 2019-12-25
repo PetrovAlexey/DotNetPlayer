@@ -42,9 +42,9 @@ namespace Player
                 .AddEntityFrameworkStores<UserContext>();
             services.AddControllersWithViews();
 
-            var connectionAudio = Configuration.GetConnectionString("ConnectionAudio");
+            /*var connectionAudio = Configuration.GetConnectionString("ConnectionAudio");
             services.AddDbContext<Models.AppContext>(options =>
-                options.UseSqlServer(connectionAudio));
+                options.UseSqlServer(connectionAudio));*/
             services.AddControllersWithViews();
 
         }

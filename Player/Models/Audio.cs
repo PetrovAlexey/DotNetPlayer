@@ -11,12 +11,12 @@ namespace Player.Models
 {
     public class Audio
     {
+        public Guid AudioId { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
-        [Key]
-        public Guid Id { get; set; }
-
         public string AuthorId { get; set; }
-
+        public byte[] Label { get; set; }
+        public string Song { get; set; }
+        public IEnumerable<UserAudio> Users { get; set; }
     }
 }
