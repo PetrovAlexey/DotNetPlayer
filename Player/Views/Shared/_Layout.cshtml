@@ -24,7 +24,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Music</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Download">Download</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="MyAudio">MyMusic</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Download">Upload</a>
                         </li>
                     </ul>
                     @if (!User.Identity.IsAuthenticated)
@@ -38,10 +41,10 @@
                                         <form method="post" asp-controller="Account" asp-action="Login" class="form" role="form">
 
                                             <div class="form-group">
-                                                <input type="text" data-val="true" id="Email" name="Email" placeholder="Email" class="form-control form-control-sm" type="text" required="">
+                                                <input type="text" data-val="true" id="Email" name="Email" placeholder="Email" class="form-control form-control-sm" required="">
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" data-val="true" name="Password" id="Password" placeholder="Password" class="form-control form-control-sm" type="text" required="">
+                                                <input type="password" data-val="true" name="Password" id="Password" placeholder="Password" class="form-control form-control-sm" required="">
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-primary btn-block">Login</button>
@@ -58,7 +61,7 @@
                     else
                     {
                         <span class="navbar-text">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Личный кабинет</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="MyAudio">Личный кабинет</a>
                         </span>
                            
 

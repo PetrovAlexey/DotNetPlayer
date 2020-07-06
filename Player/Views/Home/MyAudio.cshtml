@@ -1,20 +1,19 @@
 ﻿
 @{
     ViewData["Title"] = "Личный кабинет";
-    var dictionary = (Dictionary<Guid, int>)ViewData["dict"];
 }
 
 
 @if (User.Identity.IsAuthenticated)
 {
     @model IEnumerable<Player.Models.Audio>
-    <p class="text-left"></p>
-    <h3>Чарт музыки</h3>
+    <p class="text-left">Привет, @User.Identity.Name</p>
+    <h3>Моя музыка</h3>
     <table class="table">
         <thead>
-            <tr>
-                <th>Label</th>
-                <th>Name</th>
+        <tr>
+            <th>Label</th>
+            <th>Name</th>
             <th>Album</th>
             <th></th>
             <th></th>
@@ -51,23 +50,25 @@
                             </div>
                         </form>
                     </td>
-
                     <td>
-                        <form asp-controller="Home" asp-action="Add" asp-route-id="@f.AudioId" method="post">
+                        <form asp-controller="Home" asp-action="Delete" asp-route-id="@f.AudioId" method="post">
                             <div class="form-group">
-                                <input type="submit" class="btn btn-default" value="Добавить в список"/>
+                                <input type="submit" class="btn btn-default" value="Удалить для всех"/>
+                            </div>
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-controller="Home" asp-action="Remove" asp-route-id="@f.AudioId" method="post">
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-default" value="Удалить из списка"/>
                             </div>
                         </form>
                     </td>
 
-                    <td>
-                        <text>@dictionary.FirstOrDefault(p => p.Key.Equals(f.AudioId)).Value</text>
-                    </td>
                 </tr>
             }
         }
     </table>
-
 }
 else
 {

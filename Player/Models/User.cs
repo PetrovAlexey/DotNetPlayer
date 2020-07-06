@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
 namespace Player.Models
@@ -11,5 +8,6 @@ namespace Player.Models
     {
         public string Name { get; set; }
         public int Year { get; set; }
+        public IEnumerable<UserAudio> Audios { get; set; }
     }
 }
