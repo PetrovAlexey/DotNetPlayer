@@ -5,6 +5,8 @@ namespace Player.Models
 {
     public sealed class UserContext : IdentityDbContext<User>
     {
+        public DbSet<Audio> Audios { get; set; }
+        public DbSet<UserAudio> UserAudios { get; set; }
         public UserContext(DbContextOptions<UserContext> options)
             : base(options)
         {
@@ -26,7 +28,6 @@ namespace Player.Models
                 .WithMany(c => c.Users)
                 .HasForeignKey(sc => sc.AudioId);
         }
-        public DbSet<Audio> Audios { get; set; }
-        public DbSet<UserAudio> UserAudios { get; set; }
+        
     }
 }
